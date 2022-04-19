@@ -1,6 +1,10 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BrowsingController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SearchingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,20 +29,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/pencarian', function () {
-    return view('pencarian',[
-        'title' => 'Fitur Pencarian'
-    ]);
-});
+Route::get('/pencarian', [SearchingController::class, 'index']);
 
-Route::get('/penjelajahan', function () {
-    return view('penjelajahan',[
-        'title' => 'Fitur Penjelajahan'
-    ]);
-});
+Route::get('/penjelajahan', [BrowsingController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard',[
-        'title' => 'Dashboard'
-    ]);
-});
+Route::get('/dashboard', [DashboardController::class,'index']);

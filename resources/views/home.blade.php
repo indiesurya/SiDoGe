@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Maxim Bootstrap Template - Index</title>
+  <title>SIDOGE</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,8 +46,9 @@
           <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
           <li><a class="nav-link scrollto" href="#about">SIDOGE</a></li>
           <li><a class="nav-link scrollto" href="#tentang">Tentang</a></li>
-          <li class="dropdown"><a href="#"><span>Dashboard</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span>Fitur</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
+              <li><a href="/dashboard">Dashboard</a></li>
               <li><a href="/pencarian">Pencarian</a></li>
               <li><a href="/penjelajahan">Penjelajahan</a></li>
               <li><a href="https://docs.google.com/forms/d/18PeC-4nYp7WpNqERW2toqyU-V8aJY-BqcSyYnEuQRTs/edit">Questionnaire</a></li>
