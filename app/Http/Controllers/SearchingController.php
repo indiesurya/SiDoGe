@@ -13,6 +13,7 @@ class SearchingController  extends Controller
     $pancaYadnya = $this->sparql->query('SELECT * WHERE{?g a gender:PancaYadnya}');
     $upacaraYadnya = $this->sparql->query('SELECT * WHERE{?g a gender:UpacaraYadnya}');
     $materialPembentuk = $this->sparql->query('SELECT * WHERE{?g a gender:MaterialPembentuk}');
+    
 
     $rowDurasi = [];
     $rowGenre = [];
@@ -133,8 +134,23 @@ class SearchingController  extends Controller
                 'nama' => $this->parseData($item->g->getUri())
             ]);
         }
+        }
     }
-    }
+    elseif(isset($_GET['cariKomponen'])) {
+        $resp = 1;
+        $sql = 'SELECT * WHERE {';
+        $i = 0;
+        if ($request->cariUpacaraAdat != '') {
+            if ($i == 0) {
+                $sql = $sql . '?g gender:memiliki gender:' . $request->cariUpacaraAdat;
+                $i++;
+            } else {
+                $sql = $sql . '. ?g gender:adalahGendingYangDigunakanPadaAcara gender:' . $request->cariUpacaraAdat;
+            }
+        } else {
+            $sql = $sql;
+        }
+    } 
     else{
         $sql = [];
         $resp = 0;

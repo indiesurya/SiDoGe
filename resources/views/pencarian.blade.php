@@ -1,14 +1,15 @@
 @extends('layouts.layout')
 @section('container')
 <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lagu</a>
-    </div>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Lagu</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Komponen</button>
+  </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <p class="mt-2 font-weight-bold">Pencarian berdasarkan Lagu Gender</p>   
-        <form action="" method="GET" id="cariGender">
+      <p class="mt-2 font-weight-bold">Pencarian berdasarkan Lagu Gender</p>
+      <form action="" method="GET" id="cariGender">
             <div class="row">
                 <div class="col-md-4">
                     <div class="input-group mb-3" >
@@ -82,8 +83,7 @@
             <input type="submit" name="cariLaguGender" value="Cari" class="btn btn-dark">
             <input type="submit" name="reset" value="Reset" class="btn btn-danger">
         </form>
-    </div>
-    <div class="row">
+        <div class="row">
         <div class="col-lg-6 mb-4 mt-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -117,6 +117,27 @@
             </div>
         </div>
         @endif
+    </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <p class="mt-2 font-weight-bold">Pencarian berdasarkan Komponen</p> 
+        <form action="" method="GET" id="cariGender">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="input-group mb-3" >
+                        <label class="input-group-text">Material Pembentuk</label>
+                        <select class="form-select" aria-label="Default select example" id="cariDurasi" name="cariDurasi">
+                            <option value="">Pilihlah salah satu</option>
+                            @foreach($data['rowDurasi'] as $item)
+                                <option value="{{ $item['nama'] }}">{{ str_replace('_',' ',$item['nama'])}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" name="cariLaguGender" value="Cari" class="btn btn-dark">
+            <input type="submit" name="reset" value="Reset" class="btn btn-danger">
+        </form>
     </div>
 </div>
 @endsection
