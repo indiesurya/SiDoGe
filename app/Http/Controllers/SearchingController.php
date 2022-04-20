@@ -56,6 +56,92 @@ class SearchingController  extends Controller
             'nama' => $this->parseData($item->g->getUri())
         ]);
     }
+
+    if (isset($_GET['cariLaguGender'])) {
+        $resp = 1;
+        $sql = 'SELECT * WHERE {';
+        $i = 0;
+        if ($request->cariDurasi != '') {
+            if ($i == 0) {
+                $sql = $sql . '?g gender:memilikiDurasi gender:' . $request->cariDurasi;
+                $i++;
+            } else {
+                $sql = $sql . '. ?g gender:memilikiDurasi gender:' . $request->cariDurasi;
+            }
+        } else {
+            $sql = $sql;
+        }
+        if ($request->cariGenre != '') {
+            if ($i == 0) {
+                $sql = $sql . '?g gender:memilikiGenreFungsi gender:' . $request->cariGenre;
+                $i++;
+            } else {
+                $sql = $sql . '. ?g gender:memilikiGenreFungsi gender:' . $request->cariGenre;
+            }
+        } else {
+            $sql = $sql;
+        }
+        if ($request->cariTempo != '') {
+            if ($i == 0) {
+                $sql = $sql . '?g gender:memilikiTempo gender:' . $request->cariTempo;
+                $i++;
+            } else {
+                $sql = $sql . '. ?g gender:memilikiTempo gender:' . $request->cariTempo;
+            }
+        } else {
+            $sql = $sql;
+        }
+        if ($request->cariTingkatKesulitan != '') {
+            if ($i == 0) {
+                $sql = $sql . '?g gender:memilikiTingkatKesulitan gender:' . $request->cariTingkatKesulitan;
+                $i++;
+            } else {
+                $sql = $sql . '. ?g gender:memilikiTingkatKesulitan gender:' . $request->cariTingkatKesulitan;
+            }
+        } else {
+            $sql = $sql;
+        }
+        if ($request->cariPancaYadnya != '') {
+            if ($i == 0) {
+                $sql = $sql . '?g gender:adalahGendingYangBisaDigunakanPada gender:' . $request->cariPancaYadnya;
+                $i++;
+            } else {
+                $sql = $sql . '. ?g gender:adalahGendingYangBisaDigunakanPada gender:' . $request->cariPancaYadnya;
+            }
+        } else {
+            $sql = $sql;
+        }
+        if ($request->cariUpacaraAdat != '') {
+            if ($i == 0) {
+                $sql = $sql . '?g gender:adalahGendingYangDigunakanPadaAcara gender:' . $request->cariUpacaraAdat;
+                $i++;
+            } else {
+                $sql = $sql . '. ?g gender:adalahGendingYangDigunakanPadaAcara gender:' . $request->cariUpacaraAdat;
+            }
+        } else {
+            $sql = $sql;
+        }
+        $sql= $sql . '}';
+        $query = $this->sparql->query($sql);
+        $rowLagu = [];
+        if($i=== 0){
+            $rowLagu=[];
+        }
+        else{
+        foreach ($query as $item) {
+            array_push($rowLagu, [
+                'nama' => $this->parseData($item->g->getUri())
+            ]);
+        }
+    }
+    }
+    else{
+        $sql = [];
+        $resp = 0;
+        $rowLagu=[];
+    }
+    
+
     $data = [
         'rowDurasi' => $rowDurasi,
         'rowGenre' => $rowGenre,
@@ -63,7 +149,11 @@ class SearchingController  extends Controller
         'rowTingkatKesulitan' => $rowTingkatKesulitan,
         'rowPancaYadnya' => $rowPancaYadnya,
         'rowUpacaraYadnya' => $rowUpacaraYadnya,
-        'rowMaterialPembentuk' => $rowMaterialPembentuk
+        'rowMaterialPembentuk' => $rowMaterialPembentuk,
+        'rowLagu' => $rowLagu,
+        'jumlahLagu' => count($rowLagu),
+        'sql' => $sql,
+        'resp' => $resp
     ];
 
     return view('pencarian',[

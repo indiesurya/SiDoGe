@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrowsingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchingController;
-
+use App\Http\Controllers\DetailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,11 +17,6 @@ use App\Http\Controllers\SearchingController;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard',[
-        'title' => 'Dashboard'
-    ]);
-});
 
 Route::get('/', function () {
     return view('home',[
@@ -34,3 +29,5 @@ Route::get('/pencarian', [SearchingController::class, 'index']);
 Route::get('/penjelajahan', [BrowsingController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class,'index']);
+
+Route::get('/detail-gender/{namaGender}', [DetailController::class,'index']);

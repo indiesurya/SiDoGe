@@ -21,11 +21,11 @@
 <div class="row">
     @foreach($data['rowLagu'] as $item)
     <div class="col-md-3 mb-3">
-        <div class="card" style="width: 18rem;">
+        <div class="card detail" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">{{ $item['nama'] }}</h5>
                 <p class="card-text">{{ substr($item['sinopsis'],0,50) }}...</p>
-                <a href="#" class="btn btn-dark">Detail</a>
+                <a href="/detail-gender/{{ $item['nama'] }}" class="btn btn-dark">Detail</a>
             </div>
         </div>
     </div>
